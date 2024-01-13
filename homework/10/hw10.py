@@ -1,12 +1,13 @@
-def newton_raphson(f, f_prime, x0, tol=1e-6):
-
-    while True:
+def newton_raphson(f, f_prime, x0, tol=1e-6, max_iter=100):
+    for _ in range(max_iter):
         f_x0 = f(x0)
         f_prime_x0 = f_prime(x0)
         if abs(f_x0) < tol:
             return x0
         x1 = x0 - f_x0 / f_prime_x0
         x0 = x1
+    raise ValueError("達到最大迭代次數，可能沒有收斂到根。")
+
 def main():
     n = int(input("請輸入 n 值："))
     coefficients = [float(input("請輸入係數 a_" + str(i) + "：")) for i in range(n + 1)]
